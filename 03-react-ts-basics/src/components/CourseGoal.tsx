@@ -1,10 +1,15 @@
-export default function CourseGoal(props: any) {
+type Props = {
+    title: string;
+    description: string;
+}
+
+export default function CourseGoal({ title, description }: Props) {
 
     return (
         <article>
             <div>
-                <h2>Title</h2>
-                <p>Description</p>
+                <h2>{ title }</h2>
+                <p>{ description }</p>
             </div>
             <button>Delete</button>
         </article>
