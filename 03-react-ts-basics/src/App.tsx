@@ -15,14 +15,13 @@ import goalsImg from './assets/goals.jpg';
 export default function App() {
     const [goals, setGoals] = useState<TCourseGoal[]>([]);
 
-    function handleAddGoal(): void {
+    function handleAddGoal(goal: string, summary: string): void {
         const newGoal: TCourseGoal = {
             id: Math.random(),
-            title: 'Learn React & TS',
-            description: 'Learn it in depth',
+            title: goal,
+            description: summary,
         }
         setGoals(prevGoals => [...prevGoals, newGoal]);
-        // console.log(goals);
     }
 
     function handleDeleteGoal(id: number): void {
@@ -39,7 +38,7 @@ export default function App() {
 
     function buttonElement() : JSX.Element {
         return (
-            <NewGoal></NewGoal>
+            <NewGoal onAddGoal={ handleAddGoal }></NewGoal>
         );
     }
 

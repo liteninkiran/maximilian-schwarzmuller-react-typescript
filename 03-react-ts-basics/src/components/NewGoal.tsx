@@ -1,6 +1,10 @@
 import { useRef, type FormEvent } from 'react';
 
-function NewGoal(): JSX.Element {
+type TProps = {
+    onAddGoal: (goal: string, summary: string) => void;
+}
+
+function NewGoal({ onAddGoal }: TProps): JSX.Element {
 
     const goal = useRef<HTMLInputElement>(null);
     const summary = useRef<HTMLInputElement>(null);
@@ -9,7 +13,8 @@ function NewGoal(): JSX.Element {
         event.preventDefault();
         const newGoal = goal.current!.value;
         const newSummary = summary.current!.value;
-        console.log(newGoal, newSummary);
+        event.currentTarget.reset();
+        onAddGoal(newGoal, newSummary);
     }
 
     return (
