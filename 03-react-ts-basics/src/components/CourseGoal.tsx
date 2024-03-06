@@ -1,15 +1,20 @@
 import { type PropsWithChildren } from 'react';
 
-type CourseGoalProps = PropsWithChildren<{ title: string }>;
+type TProps = {
+    id: number;
+    title: string;
+    onDelete: (id: number) => void;
+}
+type TCProps = PropsWithChildren<TProps>;
 
-const CourseGoal = ({ title, children }: CourseGoalProps) => {
+const CourseGoal = ({ id, title, onDelete, children }: TCProps) => {
     return (
         <article>
             <div>
                 <h2>{ title }</h2>
                 { children }
             </div>
-            <button>Delete</button>
+            <button onClick={ () => onDelete(id) }>Delete</button>
         </article>
     );
 }

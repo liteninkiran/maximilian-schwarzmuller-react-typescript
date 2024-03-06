@@ -24,6 +24,10 @@ export default function App() {
         // console.log(goals);
     }
 
+    function handleDeleteGoal(id: number): void {
+        setGoals(prevGoals => prevGoals.filter(goal => goal.id !== id));
+    }
+
     function headerElement() : JSX.Element {
         return (
             <Header image={{ src: goalsImg, alt: 'A list of goals' }}>
@@ -41,7 +45,7 @@ export default function App() {
     }
 
     function goalListElement(): JSX.Element {
-        return (<CourseGoalList goals={ goals }></CourseGoalList>);
+        return (<CourseGoalList onDeleteGoal={ handleDeleteGoal } goals={ goals }></CourseGoalList>);
     }
 
     function mainElement(): JSX.Element {
