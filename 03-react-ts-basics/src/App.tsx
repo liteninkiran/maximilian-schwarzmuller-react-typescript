@@ -2,8 +2,9 @@
 import { useState } from 'react';
 
 //  Components
-import CourseGoalList from './components/CourseGoalList.tsx';
 import Header from './components/Header.tsx';
+import CourseGoalList from './components/CourseGoalList.tsx';
+import NewGoal from './components/NewGoal.tsx';
 
 // Types
 import { type TCourseGoal } from './components/CourseGoal.tsx';
@@ -38,9 +39,7 @@ export default function App() {
 
     function buttonElement() : JSX.Element {
         return (
-            <button onClick={ handleAddGoal }>
-                Add Goal
-            </button>
+            <NewGoal></NewGoal>
         );
     }
 
