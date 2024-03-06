@@ -15,3 +15,8 @@ const CourseGoal = ({ title, children }: CourseGoalProps) => {
 }
 
 export default CourseGoal;
+export type TCourseGoal = {
+    id: number;
+    title: string;
+    description: string;
+}

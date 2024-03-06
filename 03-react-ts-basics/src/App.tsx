@@ -1,25 +1,27 @@
+//  React
 import { useState } from 'react';
-import CourseGoal from './components/CourseGoal.tsx';
+
+//  Components
+import CourseGoalList from './components/CourseGoalList.tsx';
 import Header from './components/Header.tsx';
+
+// Types
+import { type TCourseGoal } from './components/CourseGoal.tsx';
+
+// Assets
 import goalsImg from './assets/goals.jpg';
 
-type CourseGoal = {
-    id: number;
-    title: string;
-    description: string;
-}
-
 export default function App() {
-    const [goals, setGoals] = useState<CourseGoal[]>([]);
+    const [goals, setGoals] = useState<TCourseGoal[]>([]);
 
     function handleAddGoal(): void {
-        const newGoal: CourseGoal = {
+        const newGoal: TCourseGoal = {
             id: Math.random(),
             title: 'Learn React & TS',
             description: 'Learn it in depth',
         }
         setGoals(prevGoals => [...prevGoals, newGoal]);
-        console.log(goals);
+        // console.log(goals);
     }
 
     function headerElement() : JSX.Element {
@@ -39,28 +41,14 @@ export default function App() {
     }
 
     function goalListElement(): JSX.Element {
-        return (
-            <ul>
-                { goals.map(goalListItemElement) }
-            </ul>
-        );
-    }
-
-    function goalListItemElement(goal: CourseGoal): JSX.Element {
-        return (
-            <li key={ goal.id }>
-                <CourseGoal title={ goal.title }>
-                    <p>{ goal.description }</p>
-                </CourseGoal>
-            </li>
-        );
+        return (<CourseGoalList goals={ goals }></CourseGoalList>);
     }
 
     function mainElement(): JSX.Element {
         return (
             <main>
-                { headerElement() }
-                { buttonElement() }
+                { headerElement()   }
+                { buttonElement()   }
                 { goalListElement() }
             </main>
         );
