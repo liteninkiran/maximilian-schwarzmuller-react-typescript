@@ -2,11 +2,20 @@ import Input from './components/Input';
 import Form from './components/Form';
 import Button from './components/Button';
 
+type TFormData = {
+    name: string;
+    age: string;
+}
+
 function App() {
+    function handleSave(data: unknown) {
+        const extractedData = data as TFormData;
+        console.log(extractedData);
+    }
 
     return (
         <main>
-            <Form>
+            <Form onSave={handleSave}>
                 <Input type='text' label='Name' id='name' />
                 <Input type='number' label='Age' id='age' />
                 <p>
