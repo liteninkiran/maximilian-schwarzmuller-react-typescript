@@ -2,11 +2,12 @@ import { ReactNode } from "react";
 
 type TProps = {
     mode: 'hint' | 'warning';
+    severity?: 'low' | 'medium' | 'high';
     children: ReactNode;
 }
 
-export default function InfoBox({ mode, children }: TProps) {
-    const warningStrength = mode === 'warning' ? 'warning--medium' : '';
+export default function InfoBox({ mode, severity, children }: TProps) {
+    const warningStrength = mode === 'warning' ? `warning--${severity}` : '';
     const className = `infobox infobox-${mode} ${warningStrength}`;
     const header = <h2>Warning</h2>;
 
