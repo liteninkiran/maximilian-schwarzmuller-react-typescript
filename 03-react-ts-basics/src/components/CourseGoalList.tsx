@@ -10,7 +10,7 @@ type TProps = {
 
 function CourseGoalList({ goals, onDeleteGoal }: TProps) {
     const warning: ReactNode = (
-        <InfoBox mode='warning'>
+        <InfoBox mode='warning' severity='medium'>
             Too many goals
         </InfoBox>
     );

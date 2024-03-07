@@ -1,14 +1,22 @@
 import { ReactNode } from "react";
 
-type TProps = {
-    mode: 'hint' | 'warning';
-    severity?: 'low' | 'medium' | 'high';
+type THintBoxProps = {
+    mode: 'hint';
     children: ReactNode;
 }
 
-export default function InfoBox({ mode, severity, children }: TProps) {
-    const warningStrength = mode === 'warning' ? `warning--${severity}` : '';
-    const className = `infobox infobox-${mode} ${warningStrength}`;
+type TWarningBoxProps = {
+    mode: 'warning';
+    severity: 'low' | 'medium' | 'high';
+    children: ReactNode;
+}
+
+type TProps = THintBoxProps | TWarningBoxProps;
+
+export default function InfoBox(props: TProps) {
+    const { mode, children } = props;
+    const warningStrength = mode === 'warning' ? `warning--${ props.severity }` : '';
+    const className = `infobox infobox-${ mode } ${ warningStrength }`;
     const header = <h2>Warning</h2>;
 
     return (
