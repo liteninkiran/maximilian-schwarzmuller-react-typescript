@@ -1,10 +1,11 @@
-import { ReactNode, type ElementType } from 'react';
+import { type ReactNode, type ElementType, ComponentPropsWithoutRef } from 'react';
 
-type TProps = {
-    as: ElementType;
-};
+type TProps<T extends ElementType> = {
+    component?: T;
+    children: ReactNode;
+} & ComponentPropsWithoutRef<T>;
 
-export default function Container({ as }: TProps): ReactNode {
-    const Component = as;
-    return <Component />
+export default function Container<C extends ElementType>({ component, children, ...props }: TProps<C>): ReactNode {
+    const Component = component || 'div';
+    return (<Component {...props}>{children}</Component>);
 }
