@@ -1,10 +1,10 @@
 import Button from './components/Button';
+import Container from './components/Container';
 
 function App() {
     return (
         <main>
-            <p><Button>A Button</Button></p>
-            <p><Button href='https://google.com' target='_blank'>A Link</Button></p>
+            <Container as={Button}></Container>
         </main>
     );
 }
