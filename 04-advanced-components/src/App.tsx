@@ -3,17 +3,17 @@ import Form, { type TFormHandle } from './components/Form';
 import Button from './components/Button';
 import { useRef } from 'react';
 
-type TFormData = {
-    name: string;
-    age: string;
-}
-
 function App() {
     const customForm = useRef<TFormHandle>(null);
 
     function handleSave(data: unknown) {
-        const extractedData = data as TFormData;
-        console.log(extractedData);
+        if (!(data)                         ||
+            !(typeof data === 'object')     ||
+            !(data.hasOwnProperty('name'))  ||
+            !(data.hasOwnProperty('age'))
+        ) {
+            return;
+        }
         customForm.current?.clear();
     }
 
