@@ -9,7 +9,7 @@ export default function Timer({ name, duration }: TProps) {
     const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
 
     const { isRunning } = useTimersContext();
-    const intervalCallback = () => setRemainingTime(prevTime => prevTime - 50);
+    const intervalCallback = () => setRemainingTime(prevTime => prevTime <= 0 ? prevTime : prevTime - 50);
     const effectCallback = () => {
         let timer: number;
         if (isRunning) {
