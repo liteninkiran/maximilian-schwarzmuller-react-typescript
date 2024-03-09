@@ -35,15 +35,28 @@ export function useTimersContext() {
     return timersCtx;
 }
 
-export default function TimersContextProvider({ children }: TimersContextProviderProps) {
+type Action = {
+    type: 'ADD_TIMER' | 'START_TIMERS' | 'STOP_TIMERS';
+}
 
-    useReducer(reducer, intialState);
+function timersReducer(state: TimersState, action: Action): TimersState {
+
+}
+
+export default function TimersContextProvider({ children }: TimersContextProviderProps) {
+    const [timersState, dispatch] = useReducer(timersReducer, intialState);
     const ctx: TimersContextValue = {
         timers: [],
         isRunning: true,
-        addTimer(timerData) { },
-        startTimers() { },
-        stopTimers() { },
+        addTimer(timerData) {
+            dispatch({ type: 'ADD_TIMER' });
+        },
+        startTimers() {
+            dispatch({ type: 'START_TIMERS' });
+        },
+        stopTimers() {
+            dispatch({ type: 'STOP_TIMERS' });
+        },
     };
     return (
         <TimersContext.Provider value={ctx}>{children}</TimersContext.Provider>
