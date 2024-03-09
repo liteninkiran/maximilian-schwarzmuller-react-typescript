@@ -40,8 +40,32 @@ type Action = {
 }
 
 function timersReducer(state: TimersState, action: Action): TimersState {
-
+    if (action.type === 'ADD_TIMER') {
+        return {
+            ...state,
+            timers: [
+                ...state.timers,
+                {
+                    duration: 1,
+                    name: '',
+                }
+            ],
+        }
+    }
+    if (action.type === 'START_TIMERS') {
+        return {
+            ...state,
+            isRunning: true,
+        }
+    }
+    if (action.type === 'STOP_TIMERS') {
+        return {
+            ...state,
+            isRunning: false,
+        }
+    }
 }
+
 
 export default function TimersContextProvider({ children }: TimersContextProviderProps) {
     const [timersState, dispatch] = useReducer(timersReducer, intialState);
