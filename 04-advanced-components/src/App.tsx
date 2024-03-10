@@ -3,26 +3,38 @@ import { type ReactNode } from 'react';
 import { get } from './util/http';
 import BlogPosts, { BlogPost } from './components/BlogPosts';
 import fetchingImg from './assets/data-fetching.png';
+import { z } from 'zod';
 
-type RawDataBlogPosts = {
-    id: number;
-    userId: number;
-    title: string;
-    body: string;
-}
+const rawDataBlogPostSchema = z.object({
+    id: z.number(),
+    userId: z.number(),
+    title: z.string(),
+    body: z.string(),
+});
+const expectedResponseDataSchema = z.array(rawDataBlogPostSchema);
 
 function App() {
     const [fetchedPosts, setFetchedPosts] = useState<BlogPost[]>();
     useEffect(() => {
         async function fetchPosts() {
-            const data = (await get('https://jsonplaceholder.typicode.com/posts')) as RawDataBlogPosts[];
-            const blogPosts: BlogPost[] = data.map(post => ({
-                id: post.id,
-                title: post.title,
-                text: post.body,
-            }));
-            setFetchedPosts(blogPosts);
+            try {
+                const data = await get(
+                    'https://jsonplaceholder.typicode.com/posts'
+                );
+                const parsedData = expectedResponseDataSchema.parse(data);
+                const blogPosts: BlogPost[] = parsedData.map((rawPost) => ({
+                    id: rawPost.id,
+                    title: rawPost.title,
+                    text: rawPost.body,
+                }));
+                setFetchedPosts(blogPosts);
+            } catch (error) {
+                if (error instanceof Error) {
+                    console.log(error.message);
+                }
+            }
         }
+
         fetchPosts();
     }, []);
 
